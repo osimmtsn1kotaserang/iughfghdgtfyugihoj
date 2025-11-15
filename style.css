@@ -132,7 +132,7 @@ body {
   border-radius: 50%;
   object-fit: contain;
   padding: 12px;
-  background: rgba(255,255,255,1);
+  background: transparent;
   border: 4px solid white;
   box-shadow: 0 6px 14px rgba(0,0,0,0.18);
   margin-bottom: -10px;
@@ -204,7 +204,7 @@ body {
   border-radius: 50%;
   object-fit: contain;
   padding: 10px;
-  background: rgba(255,255,255,1);
+  background: transparent;
   border: 4px solid white;
   box-shadow: 0 6px 14px rgba(0,0,0,0.18);
   margin-bottom: -10px;
@@ -299,5 +299,6 @@ button:hover {
   border-radius: 10px;
   background: linear-gradient(90deg, #57cc99, #38a3a5);
 }
+
 
 
