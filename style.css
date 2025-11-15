@@ -255,10 +255,17 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ---------- MOBILE: stack everything, navbar center ---------- */
 @media (max-width: 768px) {
-.Homepage, 
-.Contentpage {
-  min-height: 100vh;
-  height: auto !important;
+  /* NAV */
+    .navbar ul {
+        justify-content: center;
+        transform: scale(0.82); /* kecilkan keseluruhan */
+        transform-origin: center top;
+    }
+
+    .navbar a {
+        padding: 10px 14px;  /* padding lebih kecil */
+        font-size: 13px;     /* teks lebih kecil */
+    }
 }
   /* Convert grid -> vertical stack */
   .container, .cont {
@@ -292,5 +299,4 @@ img { max-width: 100%; height: auto; display: block; }
   .bubble-card1, .bubble-card2, .bubble-card3, .bubble-card4 { width: 100%; }
   .if { font-size: 1.8rem; }
 }
-
 
