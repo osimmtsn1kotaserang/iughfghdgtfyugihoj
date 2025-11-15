@@ -1,5 +1,5 @@
 /* =========================
-   style.css — Responsive
+   style.css — FINAL VERSION
    ========================= */
 
 /* ---------- Fonts ---------- */
@@ -12,88 +12,111 @@
   font-family: BungeeSpice;
 }
 
-/* ---------- Reset & base ---------- */
+/* ---------- Reset & Base ---------- */
 * { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; padding: 0; }
-body { font-family: Lexend, Arial, sans-serif; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+html, body {
+  height: 100%; margin: 0; padding: 0;
+}
+body {
+  font-family: Lexend, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
 
-/* ---------- Page backgrounds ---------- */
-.Homepage {
-  background-color: rgb(183, 93, 211);
-  background-image: url(img/bckgrnd1.jpeg);
+/* ---------- Page Backgrounds ---------- */
+.Homepage, .Contentpage {
+  min-height: 100vh;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  position: relative;
+}
+
+/* Background images */
+.Homepage {
+  background-image: url(img/bckgrnd1.jpeg);
 }
 
 .Contentpage {
-  background-color: rgb(123, 64, 161);
   background-image: url(img/bckgrnd2.jpeg);
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  margin: 0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
 }
 
-/* disable fixed attachment on small devices (performance) */
+/* Fix background on mobile */
 @media (max-width: 768px) {
-  .Homepage, .Contentpage { background-attachment: scroll; }
+  .Homepage, .Contentpage {
+    background-attachment: scroll !important;
+  }
 }
 
-/* ---------- NAVBAR (desktop left, mobile center) ---------- */
+/* ---------- NAVBAR (desktop horizontal, mobile horizontal & scaled) ---------- */
+
 .navbar {
   width: 100%;
-  background: #a641c5;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-  z-index: 40;
+  background-color: #a641c5;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  z-index: 50;
 }
 
 .navbar ul {
+  display: flex;
+  flex-direction: row;      /* selalu horizontal */
+  justify-content: flex-start;
+  align-items: center;
   list-style: none;
   margin: 0;
-  padding: 0 24px;
-  display: flex;
-  justify-content: flex-start;  /* kiri di desktop */
-  align-items: center;
-  gap: 0;
+  padding: 0 16px;
+  white-space: nowrap;
+  overflow-x: auto;         /* agar tetap horizontal saat HP kecil */
+  scrollbar-width: none;    /* hide scrollbar */
 }
 
-.navbar li { margin: 0; }
+.navbar ul::-webkit-scrollbar {
+  display: none;
+}
+
+.navbar li { flex: 0 0 auto; }
 
 .navbar a {
   display: block;
-  padding: 14px 18px;
+  padding: 14px 20px;
+  color: white;
   text-decoration: none;
-  color: #fff;
   font-weight: 600;
+  font-size: 16px;
 }
 
 .navbar a:hover { background-color: #663080; }
 
-/* ---------- MAIN LAYOUT: GRID FOR DESKTOP, STACK FOR MOBILE ---------- */
-/* The container holds the 4 bubble-cards. We use grid to make 2x2 on desktop. */
+/* Mobile navbar (scale down, still horizontal) */
+@media (max-width: 768px) {
+
+  .navbar ul {
+    justify-content: center;
+    transform: scale(0.85);    /* perkecil biar muat */
+    transform-origin: center;
+  }
+
+  .navbar a {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+}
+
+/* ---------- BUBBLE GRID (Desktop: 2x2, Mobile: stack) ---------- */
+
 .container, .cont {
   width: 100%;
   display: grid;
-  grid-template-columns: 320px 320px; /* two columns */
-  grid-auto-rows: auto;
-  justify-content: center;     /* center the whole grid */
+  grid-template-columns: 320px 320px; /* 2 kolom di desktop */
+  justify-content: center;
   align-items: start;
-  gap: 80px 220px;             /* row-gap / column-gap -> large horizontal gap to create center hero space */
+  gap: 80px 200px;
   padding: 80px 40px;
 }
 
-/* Individual card boxes (reset absolute and standardize) */
-.bubble-card1, .bubble-card2, .bubble-card3, .bubble-card4,
+.bubble-card1, .bubble-card2,
+.bubble-card3, .bubble-card4,
 .iurl1, .iurl2, .turl, .purl {
-  position: static; /* remove absolute */
+  position: static;
   text-align: center;
   width: 260px;
   display: flex;
@@ -102,201 +125,172 @@ body { font-family: Lexend, Arial, sans-serif; -webkit-font-smoothing:antialiase
   margin: 0 auto;
 }
 
-/* ---------- Bubble visuals ---------- */
+/* Bubble image */
 .bubble-img {
-  width: 100px;              
+  width: 100px;
   height: 100px;
   border-radius: 50%;
-  object-fit: contain;         
-  padding: 12px;               
-  background: rgba(255, 255, 255, 0);           
+  object-fit: contain;
+  padding: 12px;
+  background: rgba(255,255,255,1);
   border: 4px solid white;
   box-shadow: 0 6px 14px rgba(0,0,0,0.18);
   margin-bottom: -10px;
-  position: relative;
   z-index: 2;
+  position: relative;
 }
 
-
+/* Bubble box */
 .bubble {
   background-color: white;
   border-radius: 20px;
   padding: 18px 16px;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
   width: 100%;
-  max-width: 320px;
+  max-width: 300px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.12);
   margin-top: -8px;
   position: relative;
-  z-index: 1;
 }
 
-/* triangle */
 .bubble::after {
   content: "";
   position: absolute;
   bottom: -12px;
   left: 50%;
   transform: translateX(-50%);
-  width: 0;
-  height: 0;
   border: 12px solid transparent;
   border-top-color: white;
 }
 
 .bubble-btn {
-  display: inline-block;
   margin-top: 12px;
   padding: 8px 14px;
   background-color: #9527b6;
   color: white;
-  border-radius: 20px;
+  border-radius: 18px;
   text-decoration: none;
-  transition: background 0.2s ease, transform .12s ease;
+  transition: 0.2s;
 }
-.bubble-btn:hover { transform: translateY(-3px); }
 
-/* ---------- Typography ---------- */
-.h1 {
-  color: #fff;
-  text-align: center;
-  font-size: 2rem;
-  font-family: Lexend;
-  margin: 20px 0;
+.bubble-btn:hover {
+  transform: translateY(-3px);
 }
+
+/* ---------- Mobile bubble layout ---------- */
+@media (max-width: 768px) {
+
+  .container, .cont {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 28px 16px;
+  }
+
+  .bubble-card1, .bubble-card2,
+  .bubble-card3, .bubble-card4,
+  .iurl1, .iurl2, .turl, .purl {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .bubble {
+    padding: 14px;
+    border-radius: 16px;
+  }
+
+  .bubble-img {
+    width: 80px;
+    height: 80px;
+    padding: 10px;
+  }
+}
+
+/* ---------- Very small phone ---------- */
+@media (max-width: 420px) {
+  .bubble-img { width: 70px; height: 70px; padding: 8px; }
+}
+
+/* ---------- HEADINGS ---------- */
+
 .if {
-  color: aliceblue;
+  color: white;
   text-align: center;
-  font-size: 3.2rem;
   font-family: BungeeSpice;
-  margin: 40px 0;
+  font-size: 3rem;
 }
 
-/* ---------- Peraturan ---------- */
+.h1 {
+  color: white;
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+/* ---------- PERATURAN ---------- */
 .peraturan {
-  color: #fff;
-  text-align: left;
-  font-size: 1rem;
-  font-family: Lexend;
-  background-color: rgba(131,18,141,0.95);
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
   width: 80%;
-  max-width: 920px;
-  margin: 24px auto;
+  max-width: 900px;
+  background-color: rgba(131,18,141,0.9);
+  padding: 20px;
+  border-radius: 16px;
+  color: white;
   white-space: pre-wrap;
-  line-height: 1.45;
+  margin: 24px auto;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
 }
 
 /* ---------- FORM ---------- */
+
 .form-container {
-  margin: 40px auto;
-  font-family: Lexend;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(6px);
-  padding: 22px;
-  border-radius: 12px;
-  box-shadow: 0 8px 28px rgba(0,0,0,0.12);
   width: 92%;
   max-width: 520px;
-  text-align: left;
-  transition: transform 0.18s ease;
+  background: rgba(255,255,255,0.9);
+  padding: 24px;
+  margin: 40px auto;
+  border-radius: 14px;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.12);
 }
-.form-container:hover { transform: translateY(-4px); }
 
-.form-container h1 { font-size: 1.6rem; margin: 0 0 8px; color: #222; }
-.form-container p { color: #444; margin: 0 0 12px; }
+label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
 
-label { display: block; font-weight: 700; color: #333; margin: 10px 0 6px; }
 input, textarea {
   width: 100%;
   padding: 10px 12px;
   border: 2px solid #ddd;
   border-radius: 10px;
+  margin-top: 4px;
   font-size: 1rem;
-  outline: none;
-  transition: box-shadow .12s, border-color .12s;
 }
-input:focus, textarea:focus { border-color: #57cc99; box-shadow: 0 0 6px rgba(87,204,153,0.14); }
-textarea { resize: vertical; min-height: 80px; }
 
 button {
-  margin-top: 12px;
-  background: linear-gradient(135deg,#6a11cb,#2575fc);
-  color: white;
-  border: none;
+  margin-top: 14px;
   padding: 10px 16px;
-  font-size: 1rem;
-  border-radius: 8px;
+  background: linear-gradient(135deg,#6a11cb,#2575fc);
+  border: none;
+  color: white;
+  border-radius: 10px;
   cursor: pointer;
 }
-button:hover { transform: translateY(-2px); }
 
-/* status + progress */
-#status { margin-top: 12px; font-weight: 700; display:block; color:#333; }
-.progress-bar { height: 12px; background: #eee; border-radius: 10px; overflow: hidden; margin-top: 10px; }
-.progress { height: 100%; background: linear-gradient(90deg,#57cc99,#38a3a5); width: 0%; transition: width .45s ease; }
-
-/* ---------- Images utility ---------- */
-img { max-width: 100%; height: auto; display: block; }
-
-/* ---------- Desktop large tweaks ---------- */
-@media (min-width: 1200px) {
-  .container { padding: 100px 80px; gap: 80px 240px; } /* bigger horizontal gap for central hero area */
-  .if { font-size: 4rem; }
+button:hover {
+  transform: scale(1.05);
 }
 
-/* ---------- Tablet ---------- */
-@media (max-width: 1024px) {
-  .container { gap: 60px 180px; padding: 60px 40px; }
-  .if { font-size: 2.8rem; }
-  .bubble-img { width: 88px; height: 88px; }
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background: #eee;
+  border-radius: 10px;
+  margin-top: 12px;
 }
 
-/* ---------- MOBILE: stack everything, navbar center ---------- */
-@media (max-width: 768px) {
-  /* NAV */
-  .navbar ul {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 12px;
-  }
-  .navbar a {
-    text-align: center;
-    padding: 10px 12px;
-  }
-
-  /* Convert grid -> vertical stack */
-  .container, .cont {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    padding: 28px 16px;
-    align-items: center;
-  }
-
-  .bubble-card1, .bubble-card2, .bubble-card3, .bubble-card4,
-  .iurl1, .iurl2, .turl, .purl {
-    width: 100%;
-    max-width: 420px;
-    margin: 0 auto;
-  }
-
-  .bubble { padding: 14px; border-radius: 14px; }
-  .bubble::after { bottom: -10px; border-width: 10px; }
-
-  .if { font-size: 2.2rem; margin-top: 22px; }
-  .h1 { font-size: 1.4rem; }
-
-  .peraturan { width: 95%; margin: 16px auto; padding: 14px; border-radius: 12px; }
-  .form-container { width: 95%; padding: 16px; margin: 20px auto; }
-}
-
-/* ---------- Very small phones ---------- */
-@media (max-width: 420px) {
-  .bubble-img { width: 72px; height: 72px; margin-bottom: -16px; }
-  .bubble-card1, .bubble-card2, .bubble-card3, .bubble-card4 { width: 100%; }
-  .if { font-size: 1.8rem; }
+.progress {
+  height: 100%;
+  width: 0%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #57cc99, #38a3a5);
 }
 
