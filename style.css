@@ -260,18 +260,6 @@ img { max-width: 100%; height: auto; display: block; }
   min-height: 100vh;
   height: auto !important;
 }
-  /* NAV */
-  .navbar ul {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 8px 12px;
-  }
-  .navbar a {
-    text-align: center;
-    padding: 10px 12px;
-  }
-
   /* Convert grid -> vertical stack */
   .container, .cont {
     display: flex;
@@ -304,4 +292,5 @@ img { max-width: 100%; height: auto; display: block; }
   .bubble-card1, .bubble-card2, .bubble-card3, .bubble-card4 { width: 100%; }
   .if { font-size: 1.8rem; }
 }
+
 
