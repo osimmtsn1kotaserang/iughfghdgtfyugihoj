@@ -255,6 +255,11 @@ img { max-width: 100%; height: auto; display: block; }
 
 /* ---------- MOBILE: stack everything, navbar center ---------- */
 @media (max-width: 768px) {
+.Homepage, 
+.Contentpage {
+  min-height: 100vh;
+  height: auto !important;
+}
   /* NAV */
   .navbar ul {
     flex-direction: column;
@@ -299,3 +304,4 @@ img { max-width: 100%; height: auto; display: block; }
   .bubble-card1, .bubble-card2, .bubble-card3, .bubble-card4 { width: 100%; }
   .if { font-size: 1.8rem; }
 }
+
