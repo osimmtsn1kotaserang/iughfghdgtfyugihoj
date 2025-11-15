@@ -41,12 +41,6 @@ body { font-family: Lexend, Arial, sans-serif; -webkit-font-smoothing:antialiase
   display: flex;
   flex-direction: column;
 }
-
-/* disable fixed attachment on small devices (performance) */
-@media (max-width: 768px) {
-  .Homepage, .Contentpage { background-attachment: scroll; }
-}
-
 /* ---------- NAVBAR (desktop left, mobile center) ---------- */
 .navbar {
   width: 100%;
@@ -299,4 +293,5 @@ img { max-width: 100%; height: auto; display: block; }
   .bubble-card1, .bubble-card2, .bubble-card3, .bubble-card4 { width: 100%; }
   .if { font-size: 1.8rem; }
 }
+
 
